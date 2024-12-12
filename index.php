@@ -12,7 +12,7 @@
 <body>
     <h1>Welcome to the Quiz Website!</h1>
     <?php if (isset($_SESSION['user_id'])): ?>
-        <p>Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>! You are logged in.</p>
+        <p>Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
         <a href="quiz_select.php">Go to Quiz Selection</a><br>
         <a href="logout.php">Logout</a>
     <?php else: ?>
