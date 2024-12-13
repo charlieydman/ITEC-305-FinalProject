@@ -7,7 +7,7 @@
         exit;
     }
 
-    require 'db.php'; // Include the database connection file
+    require 'db.php'; // Database connection file
 ?>
 
 <!DOCTYPE html>
@@ -16,19 +16,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Selection</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-    <p>Select a quiz below:</p>
-    <ul>
+    <h3>Select a quiz below:</h3> 
+
+    <div class="quiz-container">
         <?php
         // Fetch quizzes from the database
         $stmt = $pdo->query("SELECT * FROM quizzes");
+        $n=0;
         while ($quiz = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<li><a href='quiz.php?quiz_id=" . $quiz['id'] . "'>" . htmlspecialchars($quiz['title']) . "</a></li>";
+            echo "
+            <div class='quiz-box'>
+                <img src='pic$n.jpg'>
+                <div class='quiz-title'>" . htmlspecialchars($quiz['title']) . "</div>
+                <a href='quiz.php?quiz_id=" . $quiz['id'] . "'><button>Take Quiz</button></a>
+            </div>";
+            $n++;
         }
-        ?>
-    </ul>
-    <a href="logout.php">Logout</a>
+        ?>  
+    </div>
+
+    <div class="button-container">
+        <a href="past_scores.php"><button>Past Quizes</button></a>
+        <a href="logout.php"><button>Logout</button></a>
+    </div>
 </body>
 </html>
